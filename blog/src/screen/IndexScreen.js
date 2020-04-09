@@ -1,10 +1,24 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import { View, Text, StyleSheet, FlatList, Button, TouchableOpacity } from 'react-native'
 import { Context } from '../context/BlogContext'
 import {Feather} from '@expo/vector-icons'
 
 const IndexScreen = ({navigation}) => {
-  const { state, deleteBlogPost } = useContext(Context);
+  const { state, deleteBlogPost, getBlogPosts } = useContext(Context);
+
+  useEffect(() => {
+    getBlogPosts();
+
+    // Cuando regresemos de nuevo a la pantalla
+    navigation.addListener("focus", () => {
+      getBlogPosts();
+    });
+
+    return () => {
+     //  listener.remove()
+      navigation.removeListener();
+    }
+  }, []);
 
   return (
     <View>
