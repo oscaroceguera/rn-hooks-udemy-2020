@@ -33,6 +33,6 @@ app.get('/', requireAuth, (req, res) => {
 app.listen(3000, () => console.log('server running 3000'))
 
 // 1) hacer el signup de usuario normal email y password
-// 2) hacer lo del jwton al momento de siwgnup
+// 2) hacer lo del jwt al momento de singnup
 // 3) aplicaro el Salting y hasing en el modelo que es el 'pre' y el metodo para comparar el password
 // 4) Crear el login
