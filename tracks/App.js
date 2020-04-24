@@ -3,13 +3,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-
 import AccountScreen from './src/screens/AccountScreen'
 import SigninScreen from "./src/screens/SigninScreen";
 import SingupScreen from "./src/screens/SingupScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
+import { Provider as AuthProvider} from './src/context/AuthContext'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -52,13 +52,15 @@ const isLoggedIn = true
 
 const RooStack = () => {
   return (
-    <NavigationContainer>
-      {/* {isLoggedIn ? <NavStack /> : <NavTab />} */}
-      <Tab.Navigator initialRouteName="TrackList">
-        <Stack.Screen name="loginFlow" component={NavStack} />
-        <Stack.Screen name="mainFlow" component={NavTab} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        {/* {isLoggedIn ? <NavStack /> : <NavTab />} */}
+        <Tab.Navigator initialRouteName="TrackList">
+          <Stack.Screen name="loginFlow" component={NavStack} />
+          <Stack.Screen name="mainFlow" component={NavTab} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 
